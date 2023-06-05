@@ -1,0 +1,103 @@
+openapi: 3.0.3
+info:
+  title: Recommendation Service
+  description: This is the application entry point definition document based on the OpenAPI 3.0.
+  version: "1.0"
+servers:
+  - url: http://localhost:5000
+    description: local
+tags:
+  - name: products
+    description: Everything about products
+paths:
+  /product/{productId}/similar:
+    get:
+      tags:
+        - products
+      operationId: getSimilarProducts
+      parameters:
+        - name: productId
+          description: "Id of product to search other similar products"
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "1"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductDetailServiceResponse'
+        "404":
+          description: "Product not found"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceResponse'
+        "500":
+          description: "Internal server error"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceResponse'
+
+components:
+  schemas:
+    ProductDetailServiceResponse:
+      description: 'Product detail'
+      type: object
+      properties:
+        id:
+          type: string
+          description: "Id of searched product"
+          minLength: 1
+          example: "1"
+        name:
+          type: string
+          description: "Product name"
+          example: "Midi skirt with linen buttons"
+          minLength: 1
+        price:
+          type: number
+          description: "Product price"
+          example: 25.95
+        availability:
+          type: boolean
+          description: "Indicates if product is available"
+          example: true
+      required:
+        - id
+        - name
+        - price
+        - availability
+    ServiceResponse:
+      description: "Api response unification"
+      type: object
+      properties:
+        data:
+          type: object
+          description: "Api data response"
+        errors:
+          type: array
+          description: "List of errors"
+          minItems: 0
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+        success:
+          type: boolean
+          description: "Indicates if there was an error"
+          example: false
+    ErrorResponse:
+      description: "Error response"
+      type: object
+      properties:
+        message:
+          type: object
+          description: "Error message"
+        statusCode:
+          type: integer
+          description: "Status error code"

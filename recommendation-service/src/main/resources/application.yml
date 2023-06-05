@@ -1,0 +1,20 @@
+server:
+  port: 5000
+
+spring:
+  application:
+    name: recommendation-service
+  output:
+    ansi:
+      enabled: always
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+
+api:
+  products:
+    basePath: "http://localhost:3001"
+    connectionTimeoutInSecs: 3
+    maxAttempts: 3
+    backoffTimeInSecs: 1

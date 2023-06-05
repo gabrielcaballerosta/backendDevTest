@@ -31,3 +31,46 @@ The following topics will be considered:
 - Code clarity and maintainability
 - Performance
 - Resilience
+
+-----
+# Solution 🚀
+
+The presented solution tries to obtain the details of the products attending to the performance and maintenance
+
+## Getting Started
+
+This section describes how to run the application
+
+### Prerequisites
+
+You must have installed:
+- Java >= 17
+- Maven
+
+### Installation
+
+Below are commands of how you can build application locally
+
+**LOCAL ENVIRONMENT**
+
+Go to the root folder project 🛣️
+```
+cd backendDevTest
+```
+
+Build app ⚒️
+```
+mvn clean install
+```
+
+Start application 😁
+```
+mvn -pl recommendation-service spring-boot:run
+```
+
+
+
+
+
+
+
